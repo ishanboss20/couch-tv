@@ -93,9 +93,12 @@ class HomeActivity : Activity() {
 
     private fun js(code: String) { web?.takeIf { ready }?.evaluateJavascript(code, null) }
 
-    private fun hideBars() {
-        window.decorView.windowInsetsController?.let {
-            it.hide(WindowInsets.Type.systemBars()); it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+   private fun hideBars() {
+        if (android.os.Build.VERSION.SDK_INT >= 30) {
+            window.decorView.windowInsetsController?.let {
+                it.hide(WindowInsets.Type.systemBars())
+                it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
         }
     }
 

@@ -771,10 +771,12 @@ class MainActivity : Activity() {
         fallback = null
     }
 
-    private fun hideSystemBars() {
-        window.decorView.windowInsetsController?.let {
-            it.hide(WindowInsets.Type.systemBars())
-            it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+   private fun hideSystemBars() {
+        if (android.os.Build.VERSION.SDK_INT >= 30) {
+            window.decorView.s?.let {
+                it.hide(WindowInsets.Type.systemBars())
+                it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
         }
     }
 
